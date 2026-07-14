@@ -84,10 +84,6 @@ Raw OHLCV plus engineered technical indicators:
 | XGBoost | gradient boosting | `xgboost` |
 | LightGBM | gradient boosting | `lightgbm` |
 
-**Validation:** a chronological (no-shuffle) train/test split plus
-`TimeSeriesSplit` cross-validation. **Metrics:** accuracy, precision, recall, F1,
-ROC-AUC, and a confusion matrix — reported against a majority-class baseline so
-"better than guessing" is explicit.
 ---
 
 ## Repository structure
