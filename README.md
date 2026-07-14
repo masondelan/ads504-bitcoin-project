@@ -3,29 +3,28 @@
 **ADS 504 — Final Team Project**
 University of San Diego · M.S. Applied Data Science
 
-**Team:** _add member names here_
+**Team:** Mehson Mason Delan, Nikita Rogers, Dana Neuman
 
 ---
 
 ## Problem definition
 
 **What is the problem we are solving?**
-We frame next-day Bitcoin movement as a **binary classification** problem: given market
-data up to and including today, will BTC's closing price be **higher (1)** or **lower (0)**
-in the next period? The target is the *direction* of the move, not the price itself.
+We want to predict whether Bitcoin's price will go **up or down** the next period. Instead
+of predicting the exact price, we predict the direction — up (**1**) or down (**0**). This
+makes it a **binary classification** problem, using only market data available up to and
+including the current period.
 
 **Why does it need to be solved?**
-Bitcoin is highly volatile and traded around the clock, and directional forecasts feed
-directly into trading, hedging, and risk-management decisions. A model that beats a naive
-baseline (e.g., "always predict up," or the majority class) — even by a small, consistent
-margin — is both practically useful and a clean testbed for the classification and
-feature-engineering methods covered in this course.
+Bitcoin's price moves a lot, and traders and investors make decisions based on where it's
+likely headed. A model that predicts direction even slightly better than chance is useful —
+and it's a strong way to practice the classification and feature-engineering methods from
+this course.
 
 **What does the machine-learning model solve?**
-The model learns the relationship between engineered market signals (momentum, trend,
-volatility, volume) and the *sign* of the next return. It turns a large, noisy stream of
-OHLCV data into a single actionable probability of an up-move, and lets us compare how
-different algorithm families capture (or fail to capture) that signal.
+The model looks at past price patterns like momentum, trend, and volatility — and learns
+which ones tend to come before an up period or a down period. We train several models and
+compare which one predicts direction best.
 
 ---
 
@@ -70,7 +69,7 @@ Raw OHLCV plus engineered technical indicators:
 - **Volatility:** Bollinger Bands (upper/lower/width), rolling std
 - **Returns / volume:** log returns, lagged returns, volume change
 
-> ⚠️ **Leakage warning:** the target is the *future* move. Compute every feature using only
+> **Leakage warning:** the target is the *future* move. Compute every feature using only
 > information available *at or before* the current candle, and never shuffle the rows when
 > splitting — this is time-series data.
 
@@ -89,7 +88,6 @@ Raw OHLCV plus engineered technical indicators:
 `TimeSeriesSplit` cross-validation. **Metrics:** accuracy, precision, recall, F1,
 ROC-AUC, and a confusion matrix — reported against a majority-class baseline so
 "better than guessing" is explicit.
-
 ---
 
 ## Repository structure
@@ -135,14 +133,3 @@ source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 jupyter lab                       # or open the notebooks in Google Colab
 ```
-
----
-
-## Workflow
-
-1. **`01_eda_preprocessing`** — load the raw klines, parse timestamps, check for
-   missing/duplicate rows and outliers, and profile the series.
-2. **`02_feature_engineering`** — build the technical indicators and the `direction`
-   target; select/rank candidate features.
-3. **`03_modeling`** — chronological split, cross-validate, train all four models, and
-   assemble the comparison table + plots that go into the report.
