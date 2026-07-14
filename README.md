@@ -129,3 +129,13 @@ source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 jupyter lab                       # or open the notebooks in Google Colab
 ```
+## Technologies
+
+- Python
+- Google Colab
+- GitHub
+- Microsoft Word
+- PowerPoint
+- Slack
+- ChatGPT 5.4
+- Google Gemini
