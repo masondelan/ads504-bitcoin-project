@@ -1,0 +1,19 @@
+# Core
+numpy
+pandas
+
+# Modeling
+scikit-learn
+xgboost
+lightgbm
+
+# Technical indicators (RSI, MACD, Bollinger Bands, etc.)
+ta
+
+# Visualization
+matplotlib
+seaborn
+
+# Notebooks / data download
+jupyterlab
+requests
